@@ -5,7 +5,7 @@ services:
   wiresocks:
     # image: ghcr.io/sensepost/wiresocks:latest
     image: wiresocks-multi-tunnel
-    container_name: wiresocks-${DEPLOYMENT_ID}
+    container_name: wiresocks
     mem_limit: 1gb
     memswap_limit: 2gb
     mem_reservation: 512m
@@ -46,9 +46,9 @@ services:
 
   wireguard:
     image: lscr.io/linuxserver/wireguard
-    container_name: wireguard-${DEPLOYMENT_ID}
+    container_name: wireguard
     depends_on:
-      - wiresocks-${DEPLOYMENT_ID}
+      - wiresocks
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -73,12 +73,12 @@ services:
       #- ./coredns:/config/coredns
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
-    network_mode: service:wiresocks-${DEPLOYMENT_ID}
+    network_mode: service:wiresocks
     restart: unless-stopped
 
 networks:
   wiresocks:
-    name: wiresocks-${DEPLOYMENT_ID}
+    name: wiresocks
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: wiresocks0-${DEPLOYMENT_ID}
+      com.docker.network.bridge.name: wiresocks0
