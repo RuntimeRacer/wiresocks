@@ -5,7 +5,7 @@ services:
   wiresocks:
     # image: ghcr.io/sensepost/wiresocks:latest
     image: wiresocks-multi-tunnel
-    container_name: wiresocks
+    # container_name: wiresocks
     mem_limit: 1gb
     memswap_limit: 2gb
     mem_reservation: 512m
@@ -46,7 +46,7 @@ services:
 
   wireguard:
     image: lscr.io/linuxserver/wireguard
-    container_name: wireguard
+    # container_name: wireguard
     depends_on:
       - wiresocks
     cap_add:
@@ -78,7 +78,7 @@ services:
 
 networks:
   wiresocks:
-    name: wiresocks
+    # name: wiresocks
     driver: bridge
     driver_opts:
       com.docker.network.bridge.name: wiresocks0
