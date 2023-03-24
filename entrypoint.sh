@@ -4,20 +4,19 @@
 # https://github.com/xjasonlyu/tun2socks/blob/main/docker/entrypoint.sh
 
 TUN="${TUN:-tun0}"
-ADDR="${ADDR:-198.18.0.1/15}"
+ADDR="${ADDR:-198.18.0.1}"
 LOGLEVEL="${LOGLEVEL:-info}"
-TUN_SUBNET_IP="${TUN_SUBNET_IP:-198.18.0.1}"
 WG_SUBNET_IP="${WG_SUBNET_IP:-10.13.13.0}"
 
 create_tun() {
   ip tuntap add mode tun dev "$TUN"
-  ip addr add "$ADDR" dev "$TUN"
+  ip addr add "${ADDR}/15" dev "$TUN"
   ip link set dev "$TUN" up
 }
 
 config_route() {
   if [ "$TUN_INCLUDED_ROUTES" == "0.0.0.0/0" ]; then
-    ip route add default via "$TUN_SUBNET_IP" dev "$TUN" table 101
+    ip route add default via "$ADDR" dev "$TUN" table 101
     ip rule add from "${WG_SUBNET_IP}/24" table 101
   else
     for addr in $(echo "$TUN_INCLUDED_ROUTES" | tr ',' '\n'); do
