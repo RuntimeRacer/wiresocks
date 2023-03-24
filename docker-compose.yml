@@ -16,7 +16,9 @@ services:
     environment:
       - LOGLEVEL=info
       - TUN=${TUN_ID}
-      - ADDR=${TUN_SUBNET_IP}
+      - ADDR=${TUN_SUBNET_IP}/15
+      - TUN_SUBNET_IP=${TUN_SUBNET_IP}
+      - WG_SUBNET_IP=${WG_SUBNET_IP}
       - MTU=9000
 
       # What we care about:
