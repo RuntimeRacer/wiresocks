@@ -16,13 +16,13 @@ rm .env
 cp .env.example .env
 
 # Replace lines in .env file
-sed -i "s/*DEPLOYMENT_ID*/DEPLOYMENT_ID=${DEPLOYMENT_ID}/" .env
-sed -i "s/*WG_UDP_PORT*/WG_UDP_PORT=${WG_UDP_PORT}/" .env
-sed -i "s/*WG_PEERS*/WG_PEERS=${WG_PEERS}/" .env
-sed -i "s/*WG_SUBNET_IP*/WG_SUBNET_IP=${WG_SUBNET_IP}/" .env
-sed -i "s/*PROXY_ADDRESS*/PROXY_ADDRESS=${PROXY_ADDRESS}/" .env
-sed -i "s/*TUN_ID*/TUN_ID=${TUN_ID}/" .env
-sed -i "s/*TUN_SUBNET_IP*/TUN_SUBNET_IP=${TUN_SUBNET_IP}/" .env
+sed -i "s/.*DEPLOYMENT_ID.*/DEPLOYMENT_ID=${DEPLOYMENT_ID}/" .env
+sed -i "s/.*WG_UDP_PORT.*/WG_UDP_PORT=${WG_UDP_PORT}/" .env
+sed -i "s/.*WG_PEERS.*/WG_PEERS=${WG_PEERS}/" .env
+sed -i "s/.*WG_SUBNET_IP.*/WG_SUBNET_IP=${WG_SUBNET_IP}/" .env
+sed -i "s/.*PROXY_ADDRESS.*/PROXY_ADDRESS=${PROXY_ADDRESS}/" .env
+sed -i "s/.*TUN_ID.*/TUN_ID=${TUN_ID}/" .env
+sed -i "s/.*TUN_SUBNET_IP.*/TUN_SUBNET_IP=${TUN_SUBNET_IP}/" .env
 
 # build local wiresocks container image with own tweaks
 docker build -t wiresocks-multi-tunnel .
