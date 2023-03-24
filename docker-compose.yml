@@ -80,5 +80,5 @@ networks:
   wiresocks:
     # name: wiresocks
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: wiresocks0
+#    driver_opts:
+#      com.docker.network.bridge.name: wiresocks0
