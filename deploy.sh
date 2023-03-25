@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# deploy.sh server.name.or.ip 51820 10.13.13.0 3 socks4://host.docker.internal:48501,socks4://host.docker.internal:48502 198.0.0.1
+# deploy.sh server.name.or.ip 51820 10.13.13.0 3 socks4://host.docker.internal:48501,socks4://host.docker.internal:48502
 
 # Get CLI Args
 # Wireguard basics
@@ -8,8 +8,8 @@ WG_HOST=$1 # IP of host server
 WG_UDP_PORT=$2
 WG_SUBNET_IP=$3
 # Proxy related
-PROXY_PEERS=$5 # amount of peers per proxy
-PROXIES=$6 # comma-separated string of proxies
+PROXY_PEERS=$4 # amount of peers per proxy
+PROXIES=$5 # comma-separated string of proxies
 
 # Some calculations
 PROXY_COUNT=$(echo "$PROXIES"  | tr -cd , | wc -c)
