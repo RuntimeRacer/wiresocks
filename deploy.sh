@@ -8,9 +8,10 @@ WG_HOST=$2
 WG_UDP_PORT=$3
 WG_PEERS=$4
 WG_SUBNET_IP=$5
-PROXY_ADDRESS=$6
-TUN_ID=$7
-TUN_SUBNET_IP=$8
+PROXY1_ADDRESS=$6
+PROXY2_ADDRESS=$7
+TUN_ID=$8
+TUN_SUBNET_IP=$9
 
 # Init env file based on args
 rm .env
@@ -22,7 +23,8 @@ sed -i "s,.*WG_HOST.*,WG_HOST=${WG_HOST}," .env
 sed -i "s,.*WG_UDP_PORT.*,WG_UDP_PORT=${WG_UDP_PORT}," .env
 sed -i "s,.*WG_PEERS.*,WG_PEERS=${WG_PEERS}," .env
 sed -i "s,.*WG_SUBNET_IP.*,WG_SUBNET_IP=${WG_SUBNET_IP}," .env
-sed -i "s,.*PROXY_ADDRESS.*,PROXY_ADDRESS=${PROXY_ADDRESS}," .env
+sed -i "s,.*PROXY1_ADDRESS.*,PROXY1_ADDRESS=${PROXY1_ADDRESS}," .env
+sed -i "s,.*PROXY2_ADDRESS.*,PROXY2_ADDRESS=${PROXY2_ADDRESS}," .env
 sed -i "s,.*TUN_ID.*,TUN_ID=${TUN_ID}," .env
 sed -i "s,.*TUN_SUBNET_IP.*,TUN_SUBNET_IP=${TUN_SUBNET_IP}," .env
 

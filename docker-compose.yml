@@ -15,13 +15,16 @@ services:
       - /dev/net/tun:/dev/net/tun
     environment:
       - LOGLEVEL=info
-      - TUN=${TUN_ID}
-      - ADDR=${TUN_SUBNET_IP}
-      - WG_SUBNET_IP=${WG_SUBNET_IP}
+      - TUN1=tun1
+      - TUN2=tun2
+      - ADDR1=198.18.0.1
+      - ADDR2=198.20.0.1
+#      - WG_SUBNET_IP=${WG_SUBNET_IP}
       - MTU=9000
 
       # What we care about:
-      - PROXY=${PROXY_ADDRESS}
+      - PROXY1=${PROXY1_ADDRESS}
+      - PROXY2=${PROXY2_ADDRESS}
       - TUN_INCLUDED_ROUTES=${TARGET_ROUTES}
 
       # optional options avaliable with tun2socks
