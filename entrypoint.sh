@@ -54,7 +54,7 @@ setup() {
     config_route $tun_name $tun_range_ip $IP_TABLE_IDX
 
     # Start tun2socks
-    exec tun2socks --loglevel "$LOGLEVEL" --device "$tun_name" --proxy "$proxy" "$default_args" &
+    exec tun2socks --loglevel "$LOGLEVEL" --device "$tun_name" --proxy "$proxy" $default_args &
 
     # inc indexes
     TUN_IDX=$((TUN_IDX + 1))
