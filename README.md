@@ -1,16 +1,45 @@
-# WireSocks
+# WireSocks-MultiTunnel
 
-<a href="https://twitter.com/_cablethief"><img src="https://img.shields.io/badge/twitter-%40_cablethief-blue.svg" alt="@_cablethief" height="18"></a>  <a href="https://github.com/sensepost/wiresocks/actions/workflows/docker-image.yml"><img src="https://github.com/sensepost/wiresocks/actions/workflows/docker-image.yml/badge.svg" alt="docker builds" height="18"></a>
+Setup Scripts, docker-compose.yml and Dockerfile to set up a wireguard VPN connection and 
+forcing (specific) TCP traffic through a socks proxy.
 
-Docker-compose and Dockerfile to setup a wireguard VPN connection, forcing specific TCP traffic through a socks proxy.
+This builds on top of [WireSocks](https://github.com/sensepost/wiresocks), but aims at a different use case.
+It might be possible to integrate both into each other, but at this point, this repo provides a solution to route
+ALL traffic of a wireguard peer through a local or external socks proxy, but also allowing different peers to use
+individual proxies, for example if you want to specify which peer to use a specific Proxy / IP to gain access to specific networks.
 
-I set this up after fighting with socks proxies and Windows offensive tooling.
-
-The intention is to facilitate tooling on Windows and MacOS that ignore things like [proxychains](https://github.com/rofl0r/proxychains-ng), [proxifier](https://www.proxifier.com/), and [proxycap](https://www.proxycap.com/). This is done by leveraging a wireguard to VPN to a Linux host running this project which has routing setup to force traffic via [tun2socks](https://github.com/xjasonlyu/tun2socks) into a Socks5 proxy.  
+This allows for the following setup:
+```
+Client 1 -> Wireguard Server -> Proxy 1 -> Target Network
+Client 2 -> Wireguard Server -> Proxy 2 -> Target Network
+....
+Client X -> Wireguard Server -> Proxy X -> Target Network
+```
 
 ## Warning
 
-`docker-compose` provided by ubuntu (and other distributions) is old and doesnt support versions that allow networking fancyness. Please make sure you are using a recent version `of docker-compose`. One way to check if you have a recent enough version is to run `docker compose version`. If either the command is not available, or the version reported is not at least version 2.10+, then you need to upgrade.
+`docker-compose` provided by ubuntu (and other distributions) is old and doesnt support versions that allow networking fancyness.
+Please make sure you are using a recent version of `docker-compose`.
+One way to check if you have a recent enough version is to run `docker compose version`.
+If either the command is not available, or the version reported is not at least version 2.10+, then you need to upgrade.
+
+### Upgrade Instructions (taken from [here](https://stackoverflow.com/questions/49839028/how-to-upgrade-docker-compose-to-latest-version)):
+
+First, remove the old version:
+
+If installed via **apt-get**: `sudo apt-get remove docker-compose`
+
+If installed via **curl**: `sudo rm /usr/local/bin/docker-compose`
+
+If installed via **pip**: `pip uninstall docker-compose`
+
+Then find the newest version, download it and install it:
+```
+VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
+DESTINATION=/usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m) -o $DESTINATION
+sudo chmod 755 $DESTINATION
+```
 
 ## Usage
 
