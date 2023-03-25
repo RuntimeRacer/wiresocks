@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# deploy.sh server.name.or.ip 51820 10.13.13.0 3 socks4://host.docker.internal:48501,socks4://host.docker.internal:48502
+# Sets up the project containers
+# Be aware changing the PROXY_PEERS value on an existing setup will shift routing definitions !
+# ./deploy.sh server.name.or.ip 51820 10.13.13.0 3 socks4://host.docker.internal:48501,socks4://host.docker.internal:48502
 
 # Get CLI Args
 # Wireguard basics
