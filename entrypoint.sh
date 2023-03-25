@@ -28,11 +28,12 @@ config_route() {
     ip route add default via "$tun_range_ip" dev "$tun_name" table "$ip_table_name"
 
     # For each peer
-    max_peers=$PROXY_PEERS
-    for (( i=0; i < max_peers; ++i ))
+    i=0
+    while [ $i -lt "$PROXY_PEERS" ]
     do
       last_part=$((PEER_IDX + i))
       ip rule add from "10.13.13.$last_part" table "$ip_table_name"
+      true $(( i++ ))
     done
     # inc index
     PEER_IDX=$((PEER_IDX + PROXY_PEERS))
